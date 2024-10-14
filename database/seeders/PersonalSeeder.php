@@ -35,6 +35,36 @@ class PersonalSeeder extends Seeder
         $persona->status = 'ACTIVO';
         
         $persona->save();
+        DB::connection('mysql_pasante')
+        ->table('pasante')
+        ->where('carrera', 'NINGUNO')  // Condición para seleccionar varios registros
+        ->update(['carrera' => 'INFORMATICA']);
+
+
+        //? TENEMOS DOS MANERAS, ELOQUENTS O CALL A FUNCIONES Y PROCEDIMIENTOS:
+        //!CARRERA CON VALOR 'NINUGNO'
+        //DB::connection('mysql_pasante')->statement('CALL CARRERA_NINGUNO()');
+        
+        $persona->save();
+        DB::connection('mysql_pasante')
+        ->table('pasante')
+        ->where('carrera', 'NINGUNO')  // Condición para seleccionar varios registros
+        ->update(['carrera' => 'INFORMATICA']);
+
+        //!AREA CON VALOR 'NINUGNO'
+        DB::connection('mysql_pasante')->statement('CALL AREA_NINGUNO()');
+
+        /*$persona->save();
+        DB::connection('mysql_pasante')
+        ->table('pasante')
+        ->where('carrera', 'NINGUNO')  // Condición para seleccionar varios registros
+        ->update(['carrera' => 'INFORMATICA']);*/
+
+        //!fechaini vacias, lo rellenamos, con la primera asistencia:
+        DB::connection('mysql_pasante')->statement('CALL FECHAINI_VACIA()');
+
+        //!fechafin vacias:
+        DB::connection('mysql_pasante')->statement('CALL FECHAFIN_VACIA()');
 
         $pasantes = DB::connection('mysql_pasante')->table('pasante')->get();
         foreach ($pasantes as $pasante) {

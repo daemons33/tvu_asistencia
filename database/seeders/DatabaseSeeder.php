@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call([AreaSeeder::class,
                     CarreraSeeder::class,
                     RelacionLaboralSeeder::class,
-                    PersonalSeeder::class
+                    PersonalSeeder::class,
+                    AsistenciaSeeder::class
         ]);
     }
 }
