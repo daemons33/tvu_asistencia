@@ -24,4 +24,14 @@ Route::resource('carrera', CarreraController::class)->except('show');
 Route::resource('area', AreaController::class)->except('show');
 Route::resource('laboral', RelacionLaboralController::class)->except('show');
 Route::resource('personal', PersonalController::class);
-Route::resource('asistencia', AsistenciaController::class)->except('show');
+
+Route::get('/asistencia', [AsistenciaController::class, 'index'])->name('asistencia.index');
+Route::get('/asistencia/asistencia', [AsistenciaController::class, 'create'])->name('asistencia.create');
+Route::post('/asistencia', [AsistenciaController::class, 'store'])->name('asistencia.store');
+
+Route::get('/asistencia/ci', [AsistenciaController::class, 'show'])->name('asistencia.show');
+
+Route::get('/asistencia/{asistencia}/edit', [AsistenciaController::class, 'edit'])->name('asistencia.edit');
+Route::put('/asistencia/{asistencia}', [AsistenciaController::class, 'update'])->name('asistencia.update');
+Route::delete('/asistencia/{asistencia}', [AsistenciaController::class, 'destroy'])->name('asistencia.destroy');
+//Route::resource('asistencia', AsistenciaController::class);

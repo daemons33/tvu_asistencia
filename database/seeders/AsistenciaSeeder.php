@@ -19,19 +19,22 @@ class AsistenciaSeeder extends Seeder
     {
         $asistencias = DB::connection('mysql_pasante')->table('asistencia')->get();
         foreach($asistencias as $control){
-            $asistencia  = new Asistencia();
-            $asistencia->ci = $control->cip;
+                $asistencia  = new Asistencia();
+                $asistencia->ci = $control->cip;
+                
+                $entrada = Carbon::createFromFormat('d/m/Y H:i', $control->fecha_a . ' ' . $control->hora_entrada)
+                        ->format('Y-m-d H:i:s');
 
-            $fechaEntrada = Carbon::createFromFormat('Y-m-d', $control->fecha_a)
-            ->setTimeFromTimeString($control->hora_entrada);
+                $salida = Carbon::createFromFormat('d/m/Y H:i', $control->fecha_a . ' ' . $control->hora_salida)
+                        ->format('Y-m-d H:i:s');
 
-            $fechaSalida = Carbon::createFromFormat('Y-m-d', $control->fecha_a)
-            ->setTimeFromTimeString($control->hora_salida);
+                $asistencia->entrada = $entrada;
+                $asistencia->salida = $salida;
 
-            $asistencia->entrada = $fechaEntrada;
-            $asistencia->salida = $fechaSalida;
-            $asistencia->hora_dia = $control->hora_dia;
-            $asistencia->observaciones = "";
+                $asistencia->hora_dia = $control->hora_dia;
+                $asistencia->observaciones = "";
+
+                $asistencia->save();
         }
     }
 }

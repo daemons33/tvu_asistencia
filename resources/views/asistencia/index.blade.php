@@ -8,6 +8,19 @@
 </div>
 <br>
 <a href="{{ route('asistencia.create') }}">MARCAR</a>
+
+<form action="{{ route('asistencia.show') }}" method="get">
+    <label>N° de CARNET</label>
+    <input type="text" name="ci" id="">
+    <input type="submit" value="Buscar">
+    
+    @if (session('error'))
+        <div style="color: red;">
+            {{ session('error') }}
+        </div>
+    @endif
+</form>
+
 <br>
 <center>
 <table>
@@ -43,20 +56,6 @@
 </table>
 </center>
 
-<br></br> 
-<form action="{{ route('asistencia.show') }}" method="get">
-    <label>N° de CARNET</label>
-    <input type="text" name="ci" id="">
-    <input type="submit" value="Buscar">
-    
-    @if (session('error'))
-        <div style="color: red;">
-            {{ session('error') }}
-        </div>
-    @endif
-</form>
-
-<br><br>
 
 
 @endsection

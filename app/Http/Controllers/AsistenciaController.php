@@ -18,7 +18,7 @@ class AsistenciaController extends Controller
      */
     public function index()
     {
-        $asistencias = Asistencia::OrderBy('id', 'desc')->get();
+        $asistencias = Asistencia::OrderBy('id', 'desc')->paginate(50);
         //return $asistencia;
         return view('asistencia.index', compact('asistencias'));
     }
