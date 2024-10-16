@@ -17,6 +17,8 @@ class AsistenciaSeeder extends Seeder
      */
     public function run()
     {
+        DB::connection('mysql_pasante')->statement('CALL OMISION_MARCADO()');
+        
         $asistencias = DB::connection('mysql_pasante')->table('asistencia')->get();
         foreach($asistencias as $control){
                 $asistencia  = new Asistencia();
